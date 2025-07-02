@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Multi-Step Registration Form
 
-## Getting Started
+This project is a modern, accessible multi-step registration form built with [Next.js](https://nextjs.org/), [React Hook Form](https://react-hook-form.com/), and [Zod](https://zod.dev/) for schema validation. It features step-by-step user input, validation, and a review/confirmation step.
 
-First, run the development server:
+## Thought Process & Dependencies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Why Shadcn UI?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I chose [shadcn/ui](https://ui.shadcn.com/) for its composable, accessible, and unstyled React components. This allowed me to quickly scaffold the UI with a consistent design system, while still giving me full control over styling via Tailwind CSS. The flexibility of shadcn/ui made it easier to build custom layouts and interactive elements like the step indicator.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Why Zod?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+[Zod](https://zod.dev/) was selected for schema validation because of its TypeScript-first approach and seamless integration with React Hook Form via the `zodResolver`. Zod enables robust, declarative validation logic that is easy to maintain and extend as the form grows.
 
-## Learn More
+### Other Dependencies
 
-To learn more about Next.js, take a look at the following resources:
+- **React Hook Form**: For performant, scalable form state management and validation.
+- **Lucide React**: For clean, modern icons in the UI (e.g., step indicator icons).
+- **Tailwind CSS**: For utility-first styling and rapid prototyping.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Challenges & Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Step Indicator Customization
 
-## Deploy on Vercel
+One of the main challenges was customizing the step indicator to be both visually appealing and accessible. The default shadcn/ui components provided a good starting point, but I needed to:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Implement a progress bar that visually tracks the user's progress.
+- Show icons and labels for each step, with clear distinction between completed, current, and upcoming steps.
+- Ensure keyboard and screen reader accessibility.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This required writing a custom [`StepIndicator`](components/StepIndicator.tsx) component and carefully managing state transitions and ARIA attributes.
+
+### Validation & User Experience
+
+Integrating Zod with React Hook Form required careful mapping of validation errors to user-friendly messages. Ensuring that validation only triggered for the current step, and not the entire form, was another challenge that was solved by dynamically triggering validation for relevant fields.
+
